@@ -1,0 +1,60 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <changeSet id="v1-1" author="Il Shan">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="wallet"/>
+            </not>
+        </preConditions>
+        <createTable tableName="wallet">
+            <column name="id" type="UUID">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="balance" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addDefaultValue tableName="wallet" columnName="balance" defaultValue="0"/>
+    </changeSet>
+
+    <changeSet id="v1-2" author="Il Shan">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="transaction"/>
+            </not>
+        </preConditions>
+
+        <createTable tableName="transaction">
+            <column name="id" type="SERIAL">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="wallet_id" type="UUID">
+                <constraints foreignKeyName="fk_transaction_wallet" references="wallet(id)"/>
+            </column>
+            <column name="operation_type" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="amount" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_at" type="TIMESTAMP">
+            </column>
+        </createTable>
+
+        <addDefaultValue tableName="transaction" columnName="created_at" defaultValueComputed="CURRENT_TIMESTAMP"/>
+    </changeSet>
+    
+<!--    <changeSet id="v1-2" author="Il Shan">-->
+<!--        <preConditions onFail="MARK_RAN">-->
+<!--            <tableIsEmpty tableName="wallet"/>-->
+<!--        </preConditions>-->
+
+<!--        <loadData tableName="wallet" file="db/data/wallet-data.csv"/>-->
+<!--    </changeSet>-->
+
+</databaseChangeLog>
