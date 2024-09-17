@@ -1,0 +1,12 @@
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/wallet
+    username: qwerty
+    password: qwerty
+
+  liquibase:
+    change-log: classpath:db/changelog/main-changelog.xml
+
+server:
+  port: 8081
