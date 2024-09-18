@@ -2,10 +2,7 @@ package com.ilshan.wallet.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ilshan.wallet.dto.TransactionRequest;
-import com.ilshan.wallet.dto.WalletRequest;
 import com.ilshan.wallet.entity.OperationType;
-import com.ilshan.wallet.entity.Transaction;
-import com.ilshan.wallet.entity.Wallet;
 import com.ilshan.wallet.exceptions.InsufficientFundsException;
 import com.ilshan.wallet.exceptions.InvalidOperationTypeException;
 import com.ilshan.wallet.service.WalletServiceImpl;
@@ -17,7 +14,6 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
-import java.util.Collections;
 import java.util.UUID;
 
 import static org.mockito.Mockito.*;

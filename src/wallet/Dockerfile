@@ -1,7 +1,11 @@
-FROM postgres:16
+FROM maven:3.8.6-eclipse-temurin-17 as builder
+WORKDIR /opt/app
+COPY mvnw pom.xml ./
+COPY ./src ./src
+RUN mvn clean install -DskipTests
 
-ENV POSTGRES_DB=wallet
-ENV POSTGRES_USER=qwerty
-ENV POSTGRES_PASSWORD=qwerty
-
-EXPOSE 5432
+FROM eclipse-temurin:17-jre-jammy
+WORKDIR /opt/app
+EXPOSE 8081
+COPY --from=builder /opt/app/target/*.jar /opt/app/*.jar
+ENTRYPOINT ["java", "-jar", "/opt/app/*.jar"]
