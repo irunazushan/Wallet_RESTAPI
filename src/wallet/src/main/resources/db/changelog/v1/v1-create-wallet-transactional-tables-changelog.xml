@@ -49,12 +49,12 @@
         <addDefaultValue tableName="transaction" columnName="created_at" defaultValueComputed="CURRENT_TIMESTAMP"/>
     </changeSet>
     
-<!--    <changeSet id="v1-2" author="Il Shan">-->
-<!--        <preConditions onFail="MARK_RAN">-->
-<!--            <tableIsEmpty tableName="wallet"/>-->
-<!--        </preConditions>-->
+    <changeSet id="v1-3" author="Il Shan">
+        <preConditions onFail="MARK_RAN">
+            <tableIsEmpty tableName="wallet"/>
+        </preConditions>
 
-<!--        <loadData tableName="wallet" file="db/data/wallet-data.csv"/>-->
-<!--    </changeSet>-->
+        <loadData tableName="wallet" file="db/data/wallet-data.csv"/>
+    </changeSet>
 
 </databaseChangeLog>
