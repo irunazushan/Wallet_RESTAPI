@@ -1,4 +1,4 @@
-package com.ilshan.wallet.controller.util;
+package com.ilshan.wallet.util;
 
 import lombok.Getter;
 import lombok.Setter;

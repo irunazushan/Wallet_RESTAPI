@@ -24,4 +24,9 @@ public class Wallet {
 
     @OneToMany(mappedBy = "wallet", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Transaction> transactions;
+
+    public Wallet(UUID id, Long balance) {
+        this.id = id;
+        this.balance = balance;
+    }
 }
