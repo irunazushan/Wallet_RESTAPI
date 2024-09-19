@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
 import java.util.UUID;
 
 @Data
@@ -18,10 +19,14 @@ public class Wallet {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "operation_type")
-    OperationType operationType;
+    @Column(name = "balance")
+    Long balance;
 
-    @Column(name = "amount")
-    Long amount;
+    @OneToMany(mappedBy = "wallet", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Transaction> transactions;
+
+    public Wallet(UUID id, Long balance) {
+        this.id = id;
+        this.balance = balance;
+    }
 }
