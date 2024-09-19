@@ -2,7 +2,6 @@ package com.ilshan.wallet.dto;
 
 import com.ilshan.wallet.entity.OperationType;
 import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

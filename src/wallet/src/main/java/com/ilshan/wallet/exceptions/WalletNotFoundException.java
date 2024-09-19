@@ -1,6 +1,5 @@
 package com.ilshan.wallet.exceptions;
 
-import com.ilshan.wallet.controller.WalletsController;
 import lombok.NoArgsConstructor;
 
 @NoArgsConstructor

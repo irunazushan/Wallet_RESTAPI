@@ -47,6 +47,17 @@ public class BadRequestControllerAdviceTest {
     }
 
     @Test
+    public void testHandleMethodArgumentTypeMismatchException() throws Exception {
+        String expectedMessage = "Invalid UUID";
+
+        mockMvc.perform(get("/api/v1/wallets/{walletId}", "notCorrectUUID")
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isBadRequest())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(jsonPath("$.message").value(expectedMessage));
+    }
+
+    @Test
     public void testHandleBindException() throws Exception {
         mockMvc.perform(post("/api/v1/wallet")
                         .contentType(MediaType.APPLICATION_JSON)

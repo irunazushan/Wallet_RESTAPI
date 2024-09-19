@@ -37,11 +37,21 @@ public class WalletController {
 
     @PostMapping("/create")
     @Transactional
-    public ResponseEntity<WalletResponse> createWallet(@RequestBody WalletRequest walletRequest) {
-        UUID walletId = UUID.fromString(walletRequest.getWalletId());
-        Wallet newWallet = walletService.saveWallet(walletId);
-        WalletResponse responseWallet = new WalletResponse(newWallet.getId(), newWallet.getBalance());
-        return ResponseEntity.status(201).body(responseWallet);
+    public ResponseEntity<WalletResponse> createWallet(
+            @Valid @RequestBody WalletRequest walletRequest,
+            BindingResult bindingResult) throws BindException {
+        if (bindingResult.hasErrors()) {
+            if (bindingResult instanceof BindException exception) {
+                throw exception;
+            } else {
+                throw new BindException(bindingResult);
+            }
+        } else {
+            UUID walletId = UUID.fromString(walletRequest.getWalletId());
+            Wallet newWallet = walletService.saveWallet(walletId);
+            WalletResponse responseWallet = new WalletResponse(newWallet.getId(), newWallet.getBalance());
+            return ResponseEntity.status(201).body(responseWallet);
+        }
     }
 
     @PostMapping

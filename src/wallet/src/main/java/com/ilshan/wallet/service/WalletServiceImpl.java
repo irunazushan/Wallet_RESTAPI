@@ -18,7 +18,7 @@ import java.util.UUID;
 
 @Service
 @AllArgsConstructor
-public class WalletServiceImpl implements WalletService{
+public class WalletServiceImpl implements WalletService {
     private final WalletRepository walletRepository;
     private final TransactionRepository transactionRepository;
 
@@ -65,7 +65,7 @@ public class WalletServiceImpl implements WalletService{
     public Long getWalletBalance(UUID walletId) {
         return walletRepository.findById(walletId)
                 .map(Wallet::getBalance)
-                .orElse(null); // or throw an exception if wallet not found
+                .orElse(null);
     }
 
     private Transaction createTransaction(Wallet wallet, OperationType operationType, Long amount) {

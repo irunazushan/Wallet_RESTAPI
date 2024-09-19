@@ -13,7 +13,7 @@ import java.util.UUID;
 @AllArgsConstructor
 public class TransactionResponse {
     private UUID walletId;
-    private OperationType operationType; // Ensure this is the correct type
+    private OperationType operationType;
     private Long amount;
     private LocalDateTime createdAt;
 }
